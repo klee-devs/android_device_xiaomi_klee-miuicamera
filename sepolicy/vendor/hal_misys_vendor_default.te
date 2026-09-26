@@ -1,0 +1,23 @@
+# /vendor/bin/hypsys_vendor, serves IMiSysImpl, IHypSysIntl and IMtkblackboxImpl
+
+type hal_misys_vendor_default, domain;
+type hal_misys_vendor_default_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(hal_misys_vendor_default)
+binder_use(hal_misys_vendor_default)
+
+hal_server_domain(hal_misys_vendor_default, hal_misys_vendor)
+hal_client_domain(hal_misys_vendor_default, hal_misyscore)
+
+allow hal_misys_vendor_default mnt_vendor_file:dir create_dir_perms;
+allow hal_misys_vendor_default mnt_vendor_file:file create_file_perms;
+allow hal_misys_vendor_default vendor_data_file:dir create_dir_perms;
+allow hal_misys_vendor_default vendor_data_file:file create_file_perms;
+allow hal_misys_vendor_default kmsg_device:chr_file rw_file_perms;
+allow hal_misys_vendor_default self:capability2 block_suspend;
+
+get_prop(hal_misys_vendor_default, vendor_default_prop)
+get_prop(hal_misys_vendor_default, boot_status_prop)
+
+# Bring-up: collect the remaining denials before enforcing
+permissive hal_misys_vendor_default;

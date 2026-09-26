@@ -1,3 +1,0 @@
-type misys_core_service, service_manager_type;
-type misys_impl_service, service_manager_type;
-type hal_misys_vendor_service, service_manager_type;
