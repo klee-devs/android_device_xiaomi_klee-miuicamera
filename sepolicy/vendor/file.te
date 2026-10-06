@@ -1,0 +1,1 @@
+type vendor_sysfs_xm_charge_log, sysfs_type, fs_type;

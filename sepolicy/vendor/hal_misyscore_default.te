@@ -14,6 +14,3 @@ allow hal_misyscore_default vendor_data_file:dir create_dir_perms;
 allow hal_misyscore_default vendor_data_file:file create_file_perms;
 
 get_prop(hal_misyscore_default, vendor_default_prop)
-
-# Bring-up: collect the remaining denials before enforcing
-permissive hal_misyscore_default;
