@@ -30,3 +30,15 @@ allow hal_misys_vendor_default self:netlink_kobject_uevent_socket create_socket_
 # MiuiCamera hands frames to IMiSysImpl through ashmem file descriptors.
 # miuicamera_app is system_ext private, so match it through appdomain.
 allow hal_misys_vendor_default appdomain:fd use;
+allow hal_misys_vendor_default appdomain_tmpfs:file { read getattr map };
+
+# MiuiCamera: LUTs and the permission test file in /mnt/vendor/persist/camera
+allow hal_misys_vendor_default persist_data_file:dir create_dir_perms;
+allow hal_misys_vendor_default persist_data_file:file create_file_perms;
+
+# MiuiCamera: watermark folders and files in /data/vendor/camera
+allow hal_misys_vendor_default vendor_camera_data_file:dir create_dir_perms;
+allow hal_misys_vendor_default vendor_camera_data_file:file create_file_perms;
+
+# MtkDfd, ModuleManager and MtkDump probe block devices, not needed to operate
+dontaudit hal_misys_vendor_default { block_device expdb_block_device }:blk_file getattr;
