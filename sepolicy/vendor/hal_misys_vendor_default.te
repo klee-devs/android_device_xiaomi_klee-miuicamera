@@ -32,9 +32,13 @@ allow hal_misys_vendor_default self:netlink_kobject_uevent_socket create_socket_
 allow hal_misys_vendor_default appdomain:fd use;
 allow hal_misys_vendor_default appdomain_tmpfs:file { read getattr map };
 
-# MiuiCamera: LUTs and the permission test file in /mnt/vendor/persist/camera
+# MiSys state under /mnt/vendor/persist/misys
 allow hal_misys_vendor_default persist_data_file:dir create_dir_perms;
 allow hal_misys_vendor_default persist_data_file:file create_file_perms;
+
+# MiuiCamera LUTs and its permission test file under /mnt/vendor/persist/camera
+allow hal_misys_vendor_default camera_persist_file:dir create_dir_perms;
+allow hal_misys_vendor_default camera_persist_file:file create_file_perms;
 
 # MiuiCamera: watermark folders and files in /data/vendor/camera
 allow hal_misys_vendor_default vendor_camera_data_file:dir create_dir_perms;
