@@ -28,7 +28,7 @@ allow hal_misys_vendor_default vendor_sysfs_xm_charge_log:file rw_file_perms;
 allow hal_misys_vendor_default self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
 
 # MiuiCamera hands frames to IMiSysImpl through ashmem file descriptors.
-# miuicamera_app is system_ext private, so match it through appdomain.
+# The platform-signed camera passes ashmem buffers through IMiSysImpl.
 allow hal_misys_vendor_default appdomain:fd use;
 allow hal_misys_vendor_default appdomain_tmpfs:file { read getattr map };
 

@@ -1,9 +1,0 @@
-type miuicamera_app, domain, coredomain;
-app_domain(miuicamera_app)
-net_domain(miuicamera_app)
-# This APK is platform-signed and needs the platform app service baseline.
-platform_app_domain(miuicamera_app)
-
-userdebug_or_eng(`
-    permissive miuicamera_app;
-')
