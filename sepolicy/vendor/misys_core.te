@@ -1,9 +1,22 @@
 type misys_core, domain;
 type misys_core_exec, exec_type, vendor_file_type, file_type;
 
-userdebug_or_eng(`
-    permissive misys_core;
-')
-
 init_daemon_domain(misys_core)
 allow servicemanager misys_core:binder call;
+
+# Allow MISYS to store MiuiCamera LUT and watermark data.
+allow misys_core vendor_camera_data_file:dir rw_dir_perms;
+allow misys_core vendor_camera_data_file:dir create;
+allow misys_core vendor_camera_data_file:file create_file_perms;
+
+# Allow read-only lookup of camera calibration and persistent data.
+r_dir_file(misys_core, camera_persist_file)
+r_dir_file(misys_core, persist_data_file)
+
+# MISYS only needs to locate expdb nodes, not access their contents.
+allow misys_core expdb_device:chr_file getattr;
+allow misys_core expdb_block_device:blk_file getattr;
+allow misys_core block_device:dir search;
+
+# Read battery-management power-supply attributes.
+r_dir_file(misys_core, sysfs_power_supply)
