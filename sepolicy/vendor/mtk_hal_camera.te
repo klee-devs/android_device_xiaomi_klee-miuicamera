@@ -1,1 +1,3 @@
-permissive mtk_hal_camera;
+userdebug_or_eng(`
+    permissive mtk_hal_camera;
+')
